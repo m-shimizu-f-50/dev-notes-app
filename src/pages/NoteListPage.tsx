@@ -13,30 +13,46 @@ export const NoteListPage = () => {
 	);
 
 	return (
-		<div style={{ display: 'flex', gap: '2rem' }}>
-			<div style={{ flex: 1 }}>
-				<h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Notes</h1>
+		<div>
+			<h1 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', fontWeight: 600 }}>
+				Notes
+			</h1>
 
-				{Object.entries(grouped).map(([category, notes]) => (
-					<section key={category} style={{ marginBottom: '1.5rem' }}>
-						<h2 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
-							{category}
-						</h2>
-						<ul style={{ paddingLeft: '1.2rem' }}>
-							{notes.map((note) => (
-								<li key={note.path} style={{ marginBottom: '0.25rem' }}>
-									<Link
-										to={`/note/${note.path}`}
-										style={{ textDecoration: 'none', color: '#0366d6' }}
-									>
-										{note.name}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</section>
-				))}
-			</div>
+			{Object.entries(grouped).map(([category, notes]) => (
+				<section key={category} style={{ marginBottom: '2rem' }}>
+					<h2
+						style={{
+							fontSize: '1.3rem',
+							marginBottom: '0.75rem',
+							fontWeight: 600,
+							color: '#333',
+						}}
+					>
+						{category}
+					</h2>
+					<ul style={{ paddingLeft: '1.5rem', listStyle: 'disc' }}>
+						{notes.map((note) => (
+							<li key={note.path} style={{ marginBottom: '0.5rem' }}>
+								<Link
+									to={`/note/${note.path}`}
+									style={{
+										textDecoration: 'none',
+										color: '#0366d6',
+									}}
+									onMouseEnter={(e) => {
+										e.currentTarget.style.textDecoration = 'underline';
+									}}
+									onMouseLeave={(e) => {
+										e.currentTarget.style.textDecoration = 'none';
+									}}
+								>
+									{note.name}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</section>
+			))}
 		</div>
 	);
 };
