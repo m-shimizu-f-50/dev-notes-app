@@ -20,22 +20,39 @@ export const NotePage = () => {
 
 	return (
 		<div style={{ display: 'flex', gap: '2rem' }}>
-			<aside style={{ width: 220, fontSize: 14 }}>
-				<div style={{ marginBottom: '1rem' }}>
-					<Link to='/' style={{ color: '#0366d6' }}>
+			<aside style={{ width: 200, fontSize: 14, flexShrink: 0 }}>
+				<div style={{ marginBottom: '1.5rem' }}>
+					<Link
+						to='/'
+						style={{
+							color: '#0366d6',
+							textDecoration: 'none',
+						}}
+						onMouseEnter={(e) => {
+							e.currentTarget.style.textDecoration = 'underline';
+						}}
+						onMouseLeave={(e) => {
+							e.currentTarget.style.textDecoration = 'none';
+						}}
+					>
 						← 一覧に戻る
 					</Link>
 				</div>
-				<div>
-					<div style={{ fontWeight: 600, marginBottom: 4 }}>Category</div>
-					<div>{note.category}</div>
+				<div
+					style={{
+						padding: '0.75rem',
+						background: '#f6f8fa',
+						borderRadius: '6px',
+					}}
+				>
+					<div style={{ fontWeight: 600, marginBottom: '0.5rem', fontSize: 12 }}>
+						Category
+					</div>
+					<div style={{ fontSize: 13 }}>{note.category}</div>
 				</div>
 			</aside>
 
-			<article style={{ flex: 1, minWidth: 0 }}>
-				<h1 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>
-					{note.name}
-				</h1>
+			<article style={{ flex: 1, minWidth: 0, maxWidth: '100%' }}>
 				<MarkdownViewer markdown={note.content} />
 			</article>
 		</div>
