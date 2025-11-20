@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# Dev Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+開発で使うサンプルコードと実装方法を Markdown で管理するための React アプリです。
 
-Currently, two official plugins are available:
+## 特徴
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📝 **Markdown ファイルを直接リポジトリに配置** - GitHub でそのまま綺麗に読める
+- 🚀 **React アプリから一覧・閲覧** - ブラウザで快適に閲覧・検索
+- 🎨 **最小限のレイアウト** - 自分用に最適化されたシンプルな UI
+- 📁 **階層構造に対応** - カテゴリごとに自動グループ化
 
-## React Compiler
+## 使い方
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. セットアップ
 
-## Expanding the ESLint configuration
+```bash
+# 依存関係のインストール
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 開発サーバーの起動
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Markdown ファイルの追加
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+`src/docs/` 配下に Markdown ファイルを配置します。
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/docs/
+  ├── React/
+  │   └── hooks/
+  │       └── useRef.md
+  ├── TypeScript/
+  │   └── types.md
+  └── その他のカテゴリ/
+      └── ノート.md
+```
+
+ファイルを追加すると、自動的にアプリに反映されます。
+
+### 3. 閲覧
+
+- **一覧ページ** (`/`) - カテゴリごとにノート一覧を表示
+- **詳細ページ** (`/note/{パス}`) - 個別のノートを閲覧
+
+## 技術スタック
+
+- **React 19** - UI ライブラリ
+- **TypeScript** - 型安全性
+- **Vite** - ビルドツール
+- **React Router** - ルーティング
+- **react-markdown** - Markdown レンダリング
+- **remark-gfm** - GitHub Flavored Markdown 対応
+
+## プロジェクト構成
+
+```
+src/
+  ├── docs/              # Markdownファイルを配置
+  ├── components/        # コンポーネント
+  │   ├── Layout.tsx
+  │   └── MarkdownViewer.tsx
+  ├── pages/            # ページコンポーネント
+  │   ├── NoteListPage.tsx
+  │   └── NotePage.tsx
+  └── notesMap.ts        # Markdownファイルの読み込み処理
+```
+
+## コマンド
+
+```bash
+# 開発サーバー起動
+npm run dev
+
+# ビルド
+npm run build
+
+# ビルド結果のプレビュー
+npm run preview
+
+# リンター実行
+npm run lint
+```
+
+## ライセンス
+
+個人利用・学習目的
